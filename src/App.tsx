@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Login from './views/login/Login';
+import { RootState } from './store';
+import { useEffect } from 'react';
 
 
 const App = () => {
 
-  const [status, setStatus] = useState<boolean>(false)
+  const status = useSelector((store: RootState) => store.login);
+  console.log(status);
 
-  useEffect(() => {
-    console.log('checking login status by backend API');
-    setStatus(false)
-  }, []);
+
 
   const view = status ? null : <Login />
 

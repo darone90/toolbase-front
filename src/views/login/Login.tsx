@@ -1,6 +1,8 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, MouseEvent } from 'react';
+import { useDispatch } from 'react-redux';
 import Button from '../../components/general/button/Button';
-import { buttonClass } from '../../../types/styleTypes';
+import { buttonClass } from '../../types/styleTypes';
+import { appLogin } from '../../features/login-slice';
 
 interface ForLogin {
     login: string;
@@ -14,8 +16,13 @@ const Login = () => {
         password: ''
     });
 
-    const loginFunc = (): void => {
-        console.log("loguje: ", loginData)
+    const dispatch = useDispatch();
+
+    const loginFunc = (event: MouseEvent<HTMLElement>) => {
+        event.preventDefault();
+        console.log("loguje: ", loginData);
+        dispatch(appLogin);
+
     };
 
     const addLoginData = (event: ChangeEvent<HTMLInputElement>) => {

@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { buttonClass } from '../../../../types/styleTypes'
+import React, { MouseEvent } from 'react';
+import { buttonClass } from '../../../types/styleTypes'
 
 
 interface Props {
     title: string;
     addClass: buttonClass;
-    func: () => void;
+    func: (event: MouseEvent<HTMLElement>) => void;
 }
 
 const Button = (props: Props) => {

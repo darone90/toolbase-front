@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ByUser from './ByUser';
 import ByTool from './ByTool';
 import Button from '../../../../components/general/button/Button';
-import { buttonClass } from '../../../../../types/styleTypes';
+import { buttonClass } from '../../../../types/styleTypes';
 
 const History = () => {
 
