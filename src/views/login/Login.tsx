@@ -7,7 +7,8 @@ import { appLogin } from '../../features/login-slice';
 interface ForLogin {
     login: string;
     password: string;
-}
+};
+
 
 const Login = () => {
 
@@ -20,8 +21,7 @@ const Login = () => {
 
     const loginFunc = (event: MouseEvent<HTMLElement>) => {
         event.preventDefault();
-        console.log("loguje: ", loginData);
-        dispatch(appLogin);
+        dispatch(appLogin(true));
 
     };
 

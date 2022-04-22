@@ -1,14 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { appLogout } from '../../../features/login-slice';
+import { appLogin } from '../../../features/login-slice';
 
 const MainMenu = () => {
 
     const dispatch = useDispatch();
 
     const logoutFunc = () => {
-        dispatch(appLogout);
+        dispatch(appLogin(false));
     }
 
     return (
@@ -16,16 +16,16 @@ const MainMenu = () => {
             <h2>MENU</h2>
             <ul>
                 <li>
-                    <NavLink to='/'>Wykaz narzędzi</NavLink>
+                    <Link to={'/'} >Wykaz narzędzi</Link>
                 </li>
                 <li>
-                    <NavLink to='/types'>Dodaj typy narzędzi</NavLink>
+                    <Link to={'/types'}>Dodaj typy narzędzi</Link>
                 </li>
                 <li>
-                    <NavLink to='/history'>Historia użytkowania</NavLink>
+                    <Link to={'/history'} >Historia użytkowania</Link>
                 </li>
                 <li>
-                    <NavLink to='/' onClick={logoutFunc}>Wyloguj</NavLink>
+                    <Link to={'/'} onClick={logoutFunc}>Wyloguj</Link>
                 </li>
             </ul>
         </div>

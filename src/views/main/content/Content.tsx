@@ -10,7 +10,7 @@ const Content = () => {
             <Routes>
                 <Route path='/' element={<List />} />
                 <Route path='/types' element={<AddType />} />
-                <Route path='history' element={<History />} />
+                <Route path='/history' element={<History />} />
             </Routes>
         </div>
     );

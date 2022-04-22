@@ -1,17 +1,14 @@
 import { useSelector } from 'react-redux';
 import Login from './views/login/Login';
 import { RootState } from './store';
-import { useEffect } from 'react';
+import Main from './views/main/Main';
 
 
 const App = () => {
 
-  const status = useSelector((store: RootState) => store.login);
-  console.log(status);
+  const { loginStatus } = useSelector((store: RootState) => store.login);
 
-
-
-  const view = status ? null : <Login />
+  const view = loginStatus ? <Main /> : <Login />
 
   return (
     <div>
