@@ -1,8 +1,24 @@
+
+
 export enum statusType {
     BASE = 'na bazie: Dostępna',
     REPAIR = 'w serwisie: Niedostępna',
     WORK = 'na wyjeździe: Niedostępna',
     PRIVATE = 'wypożyczona: Niedostępna'
+}
+
+export interface Technical {
+    brand: string;
+    type: string;
+    subtype: string;
+    serial: string;
+}
+
+export interface Local {
+    sign: string;
+    person: string;
+    status: string;
+    place: string;
 }
 
 export interface Tool {

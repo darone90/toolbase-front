@@ -19,6 +19,9 @@ const MainMenu = () => {
                     <Link to={'/'} >Wykaz narzędzi</Link>
                 </li>
                 <li>
+                    <Link to={'/addtool'} >Dodaj narzędzia do bazy</Link>
+                </li>
+                <li>
                     <Link to={'/types'}>Dodaj typy narzędzi</Link>
                 </li>
                 <li>

@@ -14,12 +14,18 @@ const Tool = (props: Props) => {
         console.log('pokaż jedno narzędzie')
     }
 
+    const editOneTool = () => {
+        console.log('edycja pojedyńczego narzędzia')
+    }
+
     return (
         <div className='Tool'>
             <img src="" alt="Chwilowy brak zdjęcia" />
             <Information tool={props.tool} />
             <Button title='Wprowadź zmiany' addClass={buttonClass.IMPORTANT} func={showOneTool} />
+            <Button title='Edytuj narzędzie' addClass={buttonClass.SMALL} func={editOneTool} />
         </div>
+
     );
 };
 

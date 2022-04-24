@@ -4,7 +4,7 @@ export const toolsList: Tool[] = [
     {
         id: 'hsye53412',
         sign: 'ksol1234',
-        person: 'Ktoś ważany',
+        person: 'Krzysiek',
         status: statusType.BASE,
         place: 'baza',
         info: {
@@ -17,7 +17,7 @@ export const toolsList: Tool[] = [
     {
         id: 'hsgt3342',
         sign: 'kgaz1234',
-        person: 'Jurek',
+        person: 'Krzysiek',
         status: statusType.BASE,
         place: 'baza',
         info: {
@@ -31,7 +31,7 @@ export const toolsList: Tool[] = [
     {
         id: 'hshyys12',
         sign: 'kdyu234',
-        person: 'Kierownik',
+        person: 'Oleh',
         status: statusType.REPAIR,
         place: 'serwis',
         info: {
@@ -45,7 +45,7 @@ export const toolsList: Tool[] = [
     {
         id: 'hsye534hsy',
         sign: 'ksol1234',
-        person: 'Ktoś ważany',
+        person: 'Dawid',
         status: statusType.WORK,
         place: 'Kunice',
         info: {
