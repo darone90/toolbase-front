@@ -52,7 +52,11 @@ const ToolTechnicalEdit = () => {
             return;
         }
         console.log('wysyłamy na serwer edytowane narzędzie', tool)
-    }
+    };
+
+    const deleter = () => {
+        console.log('usuwamy z bazy danych narzędzie o id:', tool.id)
+    };
 
     const options = list.map(type => type.name);
 
@@ -85,6 +89,7 @@ const ToolTechnicalEdit = () => {
             </form>
             <Button link={false} title='Zapisz zmiany' addClass={buttonClass.BIG} func={submiter} />
             <Button link={true} pref={'/'} ident={''} title='Wróć do listy narzędzi' addClass={buttonClass.BIG} />
+            <Button link={false} title='Usuń z bazy' addClass={buttonClass.IMPORTANT} func={deleter} />
         </div>
     );
 };

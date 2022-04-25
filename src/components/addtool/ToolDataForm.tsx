@@ -30,6 +30,9 @@ const ToolDataForm = (props: Props) => {
     };
 
     const getValue = (e: ChangeEvent<HTMLSelectElement>) => {
+        if (e.target.value === 'na bazie: Dostępna') {
+            setPlace('baza')
+        }
         setStatus(e.target.value)
     };
 
@@ -58,6 +61,7 @@ const ToolDataForm = (props: Props) => {
 
     const options = [statusType.BASE, statusType.PRIVATE, statusType.WORK, statusType.REPAIR];
 
+    const validation = status === '' || person === '' || sign === '' || place === '' ? true : false;
 
     return (
         <form>
@@ -80,7 +84,7 @@ const ToolDataForm = (props: Props) => {
                 Miejsce przechowywania / użytkowania:
                 <input type="text" value={place} onChange={getPlace} />
             </label>
-            <button onClick={submiter}>Dodaj dane...</button>
+            <button disabled={validation} onClick={submiter}>Dodaj dane...</button>
         </form>
     );
 };

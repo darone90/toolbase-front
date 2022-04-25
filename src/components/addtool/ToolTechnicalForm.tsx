@@ -55,7 +55,7 @@ const ToolTechnicalForm = (props: Props) => {
     const secondOptions = selectedTool ?
         selectedTool.subtypes
         : null
-
+    const validation = brand === '' || serial === '' || selectedTool === null || selectedSubtype === '' ? true : false;
 
     return (
         <div>
@@ -84,7 +84,7 @@ const ToolTechnicalForm = (props: Props) => {
                         value={serial}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => { setSerial(e.target.value) }} />
                 </label>
-                <button onClick={submiter}>Dodaj dane...</button>
+                <button disabled={validation} onClick={submiter}>Dodaj dane...</button>
             </form>
         </div>
     );
