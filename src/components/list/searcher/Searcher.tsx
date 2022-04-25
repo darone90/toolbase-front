@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
-import { persons } from '../../../data/persons';
-import { toolNames } from '../../../data/toolsNames';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 interface Props {
     searchType: string;
@@ -14,18 +14,23 @@ const Searcher = (props: Props) => {
 
     const [helpList, setHelpList] = useState<string[]>([]);
 
+    const { users } = useSelector((store: RootState) => store.users);
+    const { list } = useSelector((store: RootState) => store.types)
+
 
     useEffect(() => {
         if (props.searchType === 'type') {
-            const list: string[] = [];
-            toolNames.forEach(tool => list.push(tool.name));
-            setHelpList(list)
+            const typelist: string[] = [];
+            list.forEach(tool => typelist.push(tool.name));
+            setHelpList(typelist)
         } else if (props.searchType === 'person') {
-            setHelpList(persons)
+            const userList: string[] = [];
+            users.forEach(user => userList.push(user.name))
+            setHelpList(userList)
         } else {
             setHelpList([])
         }
-    }, [props.searchType]);
+    }, [props.searchType, list, users]);
 
 
     const searchHelper = helpList.length > 0 ? helpList.map((el, i) => <option value={el} key={i} />) : null;

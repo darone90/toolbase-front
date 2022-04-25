@@ -1,7 +1,9 @@
-import React, { useState, ChangeEvent, MouseEvent } from 'react';
+import React, { useState, ChangeEvent, MouseEvent, useEffect } from 'react';
 import Select from '../general/select/Select';
 import { statusType, Local } from '../../types/toolsTypes';
-import { persons as names } from '../../data/persons';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+
 
 interface Props {
     getToolData: (data: Local) => void
@@ -15,10 +17,13 @@ const ToolDataForm = (props: Props) => {
     const [sign, setSign] = useState<string>('');
     const [place, setPlace] = useState<string>('');
 
-    useState(() => {
-        console.log('strzał do api pobrać urzytkowników');
-        setPersons(names)
-    });
+    const { users } = useSelector((store: RootState) => store.users)
+
+    useEffect(() => {
+        const userList: string[] = [];
+        users.forEach(user => userList.push(user.name))
+        setPersons(userList)
+    }, [users]);
 
     const getPerson = (e: ChangeEvent<HTMLSelectElement>) => {
         setPerson(e.target.value)

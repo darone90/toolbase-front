@@ -25,6 +25,9 @@ const MainMenu = () => {
                     <Link to={'/types'}>Dodaj typy narzędzi</Link>
                 </li>
                 <li>
+                    <Link to={'/user'}>Lista osób</Link>
+                </li>
+                <li>
                     <Link to={'/history'} >Historia użytkowania</Link>
                 </li>
                 <li>
