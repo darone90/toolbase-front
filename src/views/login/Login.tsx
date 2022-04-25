@@ -43,7 +43,7 @@ const Login = () => {
                     Hasło:
                     <input type="password" value={loginData.password} name='password' onChange={addLoginData} />
                 </label>
-                <Button title='Zaloguj' addClass={buttonClass.SMALL} func={loginFunc} />
+                <Button link={false} title='Zaloguj' addClass={buttonClass.SMALL} func={loginFunc} />
             </form>
         </div>
     )

@@ -32,7 +32,7 @@ const AddType = () => {
         <div className='Add-type'>
             <div>
                 Dodaj nowy rodzaj urządzenia:
-                <Button title='Dodaj nowy rodzaj'
+                <Button link={false} title='Dodaj nowy rodzaj'
                     addClass={buttonClass.SMALL}
                     func={newTypeViewHandler} />
             </div>

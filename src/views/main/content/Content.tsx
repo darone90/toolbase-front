@@ -6,6 +6,8 @@ import AddType from './addType/AddType';
 import AddTool from './addTool/addTool';
 import UsersList from './Users/UsersList';
 import ChangeLogin from './ChangeLoginData/ChangeLogin';
+import ToolLocalEdit from '../../tool/ToolLocalEdit';
+import ToolTechnicalEdit from '../../tool/ToolTechnicEdit';
 import Error from './ErrorPage/Error';
 
 const Content = () => {
@@ -18,6 +20,8 @@ const Content = () => {
                 <Route path='/user' element={<UsersList />} />
                 <Route path='/history' element={<History />} />
                 <Route path='/change' element={<ChangeLogin />} />
+                <Route path='/list/change/:id' element={<ToolLocalEdit />} />
+                <Route path='/list/edit/:id' element={<ToolTechnicalEdit />} />
                 <Route path='/*' element={<Error />} />
             </Routes>
         </div>

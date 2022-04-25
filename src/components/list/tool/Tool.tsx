@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { Tool as ToolType } from '../../../types/toolsTypes';
 import Information from './Information';
 import Button from '../../general/button/Button';
@@ -10,11 +10,11 @@ interface Props {
 
 const Tool = (props: Props) => {
 
-    const showOneTool = () => {
-        console.log('pokaż jedno narzędzie')
+    const showOneTool = (e: MouseEvent<HTMLElement>) => {
+        e.preventDefault();
     }
 
-    const editOneTool = () => {
+    const editOneTool = (e: MouseEvent<HTMLElement>) => {
         console.log('edycja pojedyńczego narzędzia')
     }
 
@@ -22,8 +22,17 @@ const Tool = (props: Props) => {
         <div className='Tool'>
             <img src="" alt="Chwilowy brak zdjęcia" />
             <Information tool={props.tool} />
-            <Button title='Wprowadź zmiany' addClass={buttonClass.IMPORTANT} func={showOneTool} />
-            <Button title='Edytuj narzędzie' addClass={buttonClass.SMALL} func={editOneTool} />
+            <Button pref={'/list/change/'} link={true}
+                ident={props.tool.id} title='Wprowadź zmiany'
+                addClass={buttonClass.IMPORTANT}
+                func={showOneTool} />
+
+            <Button pref={'/list/edit/'}
+                link={true}
+                ident={props.tool.id}
+                title='Edytuj narzędzie'
+                addClass={buttonClass.SMALL}
+                func={editOneTool} />
         </div>
 
     );
