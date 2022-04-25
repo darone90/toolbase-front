@@ -9,7 +9,7 @@ interface Props {
     link: boolean;
     title: string;
     addClass: buttonClass;
-    func: (event: MouseEvent<HTMLElement>) => void;
+    func?: (event: MouseEvent<HTMLElement>) => void;
 }
 
 const Button = (props: Props) => {
