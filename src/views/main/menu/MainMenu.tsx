@@ -31,6 +31,9 @@ const MainMenu = () => {
                     <Link to={'/history'} >Historia użytkowania</Link>
                 </li>
                 <li>
+                    <Link to={'/change'} >Zmiana danych logowania</Link>
+                </li>
+                <li>
                     <Link to={'/'} onClick={logoutFunc}>Wyloguj</Link>
                 </li>
             </ul>

@@ -1,26 +1,43 @@
-import React, { useState } from 'react';
-import ByUser from './ByUser';
-import ByTool from './ByTool';
-import Button from '../../../../components/general/button/Button';
-import { buttonClass } from '../../../../types/styleTypes';
+import React, { ChangeEvent, useState, MouseEvent } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
+import { User } from '../../../../types/userTypes';
+import HistoryList from '../../../../components/history/HistoryList';
+
 
 const History = () => {
 
-    const [searchBy, setSearchBy] = useState<boolean>(false);
+    const [lookedPerson, setLookedPerson] = useState<string>('');
+    const [finded, setFinded] = useState<User | null>(null);
 
-    const setView = () => {
-        setSearchBy(prev => !prev);
+    const { users } = useSelector((store: RootState) => store.users);
+
+    const getPerson = (e: ChangeEvent<HTMLInputElement>) => {
+        setLookedPerson(e.target.value);
     };
 
-    const view = searchBy ? <ByTool /> : <ByUser />;
-    const btnTitle = searchBy ? 'Wyszukaj po użytkowniku' : 'Wyszukaj po narzędziu';
+    const finder = (e: MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+        const findUser = users.find(user => user.name === lookedPerson);
+        const value = findUser ? findUser : null;
+        setFinded(value);
+    }
 
+    const helpList = users.map(person => <option key={person.id} value={person.name} />)
 
     return (
-        <div>
-            <h2>Przeszukiwanie historii użytkowania</h2>
-            {view}
-            <Button title={btnTitle} addClass={buttonClass.SMALL} func={setView} />
+        <div className='History'>
+            <div className='History__searcher'>
+                <label>
+                    Podaj osobę której historię chcesz sprawdzić:
+                    <input type="text" value={lookedPerson} onChange={getPerson} list='helpList' />
+                    <datalist id='helpList'>
+                        {helpList}
+                    </datalist>
+                    <button onClick={finder}>Wyszukaj</button>
+                </label>
+            </div>
+            <HistoryList finded={finded} />
         </div>
     );
 };
