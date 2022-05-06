@@ -23,6 +23,7 @@ const Content = () => {
                 <Route path='/list/change/:id' element={<ToolLocalEdit />} />
                 <Route path='/list/edit/:id' element={<ToolTechnicalEdit />} />
                 <Route path='/*' element={<Error />} />
+                <Route path='/error/:info' element={<Error />} />
             </Routes>
         </div>
     );

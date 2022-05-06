@@ -1,9 +1,18 @@
-import React from 'react';
+import { useParams } from 'react-router-dom';
 
 
 const Error = () => {
+
+    const { info } = useParams();
+    const text = info ?
+        info
+        : 'Niestety wystąpił nie oczekiwany błąd... spróbuj za chwilę'
+
     return (
-        <div>Error</div>
+        <div>
+            <h2>Błąd!</h2>
+            <p>{text}</p>
+        </div>
     );
 };
 

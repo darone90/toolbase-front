@@ -1,15 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface Initial {
-    loginStatus: boolean
+    loginStatus: boolean,
+    token: string | null;
 };
 
 interface Status {
-    payload: boolean
+    payload: Initial
 }
 
 const initialState: Initial = {
-    loginStatus: false
+    loginStatus: false,
+    token: null,
 };
 
 export const loginSlice = createSlice({
@@ -17,7 +19,8 @@ export const loginSlice = createSlice({
     initialState,
     reducers: {
         appLogin: (state, action: Status) => {
-            state.loginStatus = action.payload;
+            state.loginStatus = action.payload.loginStatus;
+            state.token = action.payload.token;
         },
 
     }

@@ -8,7 +8,7 @@ const MainMenu = () => {
     const dispatch = useDispatch();
 
     const logoutFunc = () => {
-        dispatch(appLogin(false));
+        dispatch(appLogin({ loginStatus: false, token: null }));
     }
 
     return (
