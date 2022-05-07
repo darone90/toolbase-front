@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, MouseEvent } from 'react';
+import React, { useState, ChangeEvent, MouseEvent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Button from '../../components/general/button/Button';
 import { buttonClass } from '../../types/styleTypes';
@@ -6,6 +6,7 @@ import { appLogin } from '../../features/login-slice';
 import { communicate } from '../../global/functions';
 import { Login as LoginData } from '../../types/loginTypes';
 import Spinner from '../../components/general/loading/spinner';
+import { setSession, getSession } from '../../global/functions';
 
 interface ForLogin {
     login: string;
@@ -23,12 +24,18 @@ const Login = () => {
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        const data = getSession();
+        dispatch(appLogin({ loginStatus: data.login, token: data.token }));
+    }, [dispatch])
+
     const loginFunc = async (event: MouseEvent<HTMLElement>) => {
         event.preventDefault();
         try {
             setInfoVisible(false);
             setSpinnerVisible(true);
             const data = await communicate('/login', loginData) as LoginData;
+            setSession(data.token, data.login);
             dispatch(appLogin({ loginStatus: data.login, token: data.token }));
             setInfoVisible(true);
             setSpinnerVisible(false);

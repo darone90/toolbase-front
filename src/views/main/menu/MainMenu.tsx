@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { appLogin } from '../../../features/login-slice';
+import { setSession } from '../../../global/functions';
 
 const MainMenu = () => {
 
     const dispatch = useDispatch();
 
     const logoutFunc = () => {
+        setSession(null, false);
         dispatch(appLogin({ loginStatus: false, token: null }));
     }
 

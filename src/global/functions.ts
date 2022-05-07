@@ -1,6 +1,7 @@
 import { Tool } from '../types/toolsTypes';
 import { Login } from '../types/loginTypes';
 
+
 export const filtering = (list: Tool[], searchingType: string, searchingText: string) => {
 
     switch (searchingType) {
@@ -33,5 +34,25 @@ export const communicate = async (path: string, data: object): Promise<Login | u
         if (error instanceof Error)
             window.location.href = `/error/${error.message}`;
         //send info about error to error log
+    }
+}
+
+export const setSession = (token: string | null, loginStatus: boolean): void => {
+    const loginState = loginStatus ? 'true' : 'false';
+    const value = token ? token : '';
+    sessionStorage.setItem('token', value);
+    sessionStorage.setItem('loginStatus', loginState);
+}
+
+export const getSession = (): Login => {
+    const data = sessionStorage.getItem('token');
+    const token = data === undefined ? null : data;
+    const loginStatus = sessionStorage.getItem('loginStatus') === 'true' ? true : false;
+    const info = token ? 'Correct' : 'Uncorrect';
+
+    return {
+        login: loginStatus,
+        token,
+        info
     }
 }
