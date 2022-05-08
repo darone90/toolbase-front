@@ -69,8 +69,8 @@ export const listPoster = async (data: ToolsNames, method: string): Promise<stri
         return id.id as string
 
     } catch (error: unknown) {
-        // if (error instanceof Error)
-        //     window.location.href = `/error/${error.message}`;
+        if (error instanceof Error)
+            window.location.href = `/error/${error.message}`;
         //send info about error to error log
     }
 }

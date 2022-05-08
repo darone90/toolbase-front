@@ -9,30 +9,34 @@ import { loadAll } from '../../features/toolTypes-slice';
 import { loadAll as userLoad } from '../../features/user-slice';
 import Spinner from '../../components/general/loading/spinner';
 import { User } from '../../types/userTypes';
-import { persons } from '../../data/persons';
 import { listGetter } from '../../global/functions';
-
+import { dataGetter } from '../../global/workersHandle';
 
 const Main = () => {
 
-    const [users, setUsers] = useState<User[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     const dispatch = useDispatch();
 
+    const downloadToolsNamesList = async () => {
+        const data = await listGetter('/category');
+        if (data) { dispatch(loadAll(data)) }
+    };
+
+    const downloadWorkersNamesList = async () => {
+        const data = await dataGetter('/workers') as User[];
+        if (data) { dispatch(userLoad(data)) }
+    }
+
     useEffect(() => {
-        const downloadToolsNamesList = async () => {
-            const data = await listGetter('/category');
-            if (data) { dispatch(loadAll(data)); setLoading(false) }
-        };
-        downloadToolsNamesList();
-        console.log('strzał do api aby pobrać listę pracowników');
-        setUsers(persons)
-    }, [dispatch]);
+        (async () => {
+            await downloadToolsNamesList();
+            await downloadWorkersNamesList();
+            setLoading(false);
+        })();
+    });
 
-    if (loading || !users) return <Spinner />
-
-    dispatch(userLoad(users));
+    if (loading) return <Spinner />
 
     return (
         <div className='Main-window'>
