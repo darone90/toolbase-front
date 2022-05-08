@@ -36,6 +36,7 @@ export interface Tool {
 }
 
 export interface ToolsNames {
+    id?: string;
     name: string;
     subtypes: string[];
 }

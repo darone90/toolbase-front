@@ -1,11 +1,19 @@
 import React, { useState, ChangeEvent, MouseEvent } from 'react';
 import { ToolsNames } from '../../types/toolsTypes';
 import AddSubtypeForm from './addSubtypeForm';
+import { listPoster } from '../../global/functions';
+import InfoBox from '../general/informationBox/InfoBox';
+import { loadOne } from '../../features/toolTypes-slice';
+import { useDispatch } from 'react-redux';
 
 const AddTypeForm = () => {
 
     const [newType, setNewType] = useState<string>('');
+    const [id, setId] = useState<string>('');
+    const [infoBoxVisible, setInfoBoxVisible] = useState<boolean>(false);
     const [finalData, setFinalData] = useState<ToolsNames>({ name: '', subtypes: [] });
+
+    const dispatch = useDispatch();
 
     const addName = (e: MouseEvent<HTMLElement>) => {
         e.preventDefault()
@@ -25,9 +33,25 @@ const AddTypeForm = () => {
         }));
     }
 
-    const submiter = (e: MouseEvent<HTMLElement>) => {
+    const submiter = async (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
-        console.log('wysyłamy nowy typ', finalData)
+        if (window.confirm('Zapisać typ w bazie danych ?')) {
+            try {
+                const id = await listPoster(finalData, 'POST');
+                if (id) {
+                    setId(id)
+                    setInfoBoxVisible(true);
+                };
+                dispatch(loadOne(finalData));
+                setFinalData({ name: '', subtypes: [] });
+                setNewType('');
+            } catch (error: unknown) {
+                if (error instanceof Error)
+                    window.location.href = `/error/${error.message}`;
+                //send info about error to error log
+            }
+
+        }
     }
 
     const btnValidation = finalData.name && finalData.subtypes.length > 0 ? false : true;
@@ -37,7 +61,7 @@ const AddTypeForm = () => {
         : null;
 
     return (
-        <div className='Type-add'>
+        <div className='Type-add' onClick={() => { setInfoBoxVisible(false); setId('') }}>
             <form>
                 <label>
                     Wprowadź nazwę nowego rodzaju użądzenia:
@@ -52,6 +76,7 @@ const AddTypeForm = () => {
                 {subtypeList ? <ul>{subtypeList}</ul> : null}
                 <button disabled={btnValidation} onClick={submiter}>Zapisz Nowy Typ</button>
             </div>
+            <InfoBox visible={infoBoxVisible} name='Nowy typ urządzenia' idn={id} action='a' />
         </div>
     );
 };

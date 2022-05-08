@@ -1,5 +1,6 @@
-import React, { useEffect, useState, ChangeEvent, MouseEvent } from 'react';
-import { toolNames } from '../../data/toolsNames';
+import React, { useState, ChangeEvent, MouseEvent } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import { ToolsNames, Technical } from '../../types/toolsTypes';
 import Spinner from '../general/loading/spinner';
 import Select from '../general/select/Select';
@@ -11,20 +12,17 @@ interface Props {
 
 const ToolTechnicalForm = (props: Props) => {
 
-    const [toolTypes, setToolTypes] = useState<ToolsNames[] | null>(null);
+    const { list } = useSelector((store: RootState) => store.types);
+
     const [selectedTool, setSelectedTool] = useState<ToolsNames | null>(null);
     const [selectedSubtype, setSelectedSubtype] = useState<string>('');
     const [brand, setBrand] = useState<string>('');
     const [serial, setSerial] = useState<string>('');
 
-    useEffect(() => {
-        setToolTypes(toolNames)
-    }, []);
-
-    if (!toolTypes) return <Spinner />;
+    if (list.length < 1) return <Spinner />;
 
     const selectTool = (e: ChangeEvent<HTMLSelectElement>) => {
-        const tool = toolTypes.find(tool => tool.name === e.target.value);
+        const tool = list.find(tool => tool.name === e.target.value);
         if (tool) setSelectedTool(tool);
     }
 
@@ -50,7 +48,7 @@ const ToolTechnicalForm = (props: Props) => {
 
     }
 
-    const firstOptions = toolTypes.map(tool => tool.name);
+    const firstOptions = list.map(tool => tool.name);
 
     const secondOptions = selectedTool ?
         selectedTool.subtypes
