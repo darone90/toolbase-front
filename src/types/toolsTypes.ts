@@ -16,7 +16,7 @@ export interface Technical {
 
 export interface Local {
     sign: string;
-    person: string;
+    name: string;
     status: string;
     place: string;
 }
@@ -34,6 +34,18 @@ export interface Tool {
         serial: string;
     };
 }
+
+export interface incomingTool {
+    id: string;
+    sign: string;
+    name: string;
+    status: statusType;
+    place: string;
+    type: string;
+    subtype: string;
+    brand: string;
+    serial: string;
+} 
 
 export interface ToolsNames {
     id?: string;

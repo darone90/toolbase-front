@@ -7,15 +7,17 @@ interface Props {
 
 const HistoryRecord = (props: Props) => {
 
-    const { name, tool, from, to } = props.record
+    const { name, sign, type, subtype, brand, serial, start, end } = props.record
     return (
         <li>
             <strong>{name}</strong>
-            <p>Był odpowiedzialny za:
-                {tool.info.type} {tool.info.subtype}
-                Marki: {tool.info.brand}
+            <p>Użytkowane urządzenie
+                {type} {subtype}
+                Marki: {brand}
             </p>
-            <p>Odpowiedzialny od {from} do {to === '' ? "dziś" : to}</p>
+            <p>Odpowiedzialny od {start} do {end ? end : 'Aktualnie'}</p>
+            <strong>Oznaczenie: {sign}</strong>
+            <p>Numer seryjny: {serial}</p>
         </li>
     );
 };

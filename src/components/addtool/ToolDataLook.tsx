@@ -26,7 +26,7 @@ const ToolDataLook = (props: Props) => {
             <ul>
                 <li>Miejsce magazynowania: {props.local.place}</li>
                 <li>Status: {props.local.status}</li>
-                <li>Osoba odpowiedzialna: {props.local.person}</li>
+                <li>Osoba odpowiedzialna: {props.local.name}</li>
                 <li>Oznaczenie / grawer: {props.local.sign}</li>
             </ul>
         </div>

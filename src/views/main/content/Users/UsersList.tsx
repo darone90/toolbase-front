@@ -33,7 +33,6 @@ const UsersList = () => {
             setAction('d');
             dispatch(deleteOne(ID));
         }
-        console.log('usuwam użytkownika o id:', id)
     };
 
     const submiter = async (e: MouseEvent<HTMLElement>, user: string) => {

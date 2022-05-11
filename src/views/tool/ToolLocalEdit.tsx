@@ -2,13 +2,15 @@ import React, { useEffect, useState, MouseEvent, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Tool } from '../../types/toolsTypes';
-import { toolsList } from '../../data/tools';
+import { dataGetter, dataPoster } from '../../global/workersHandle';
 import Spinner from '../../components/general/loading/spinner';
 import { RootState } from '../../store';
 import Select from '../../components/general/select/Select';
 import { statusType } from '../../types/toolsTypes';
 import Button from '../../components/general/button/Button';
-import { buttonClass } from '../../types/styleTypes'
+import { buttonClass } from '../../types/styleTypes';
+import InfoBox from '../../components/general/informationBox/InfoBox';
+
 
 interface Flags {
     person: boolean;
@@ -26,15 +28,31 @@ const ToolLocalEdit = () => {
 
     const [tool, setTool] = useState<Tool | null>(null);
     const [flags, setFlags] = useState<Flags>({ person: false, status: false, place: false })
+    const [infoVisible, setInfoVisible] = useState<boolean>(false);
+
     const { id } = useParams();
 
     const { users } = useSelector((store: RootState) => store.users);
 
     useEffect(() => {
-        console.log('strzał do api pobranie jednego narzędzia do edycji');
-        const finded = toolsList.find(tool => tool.id === id);
-        const value = finded ? finded : null;
-        setTool(value);
+        const getOne = async () => {
+            const data = await dataGetter(`/tools/${id}`)
+            const toSet: Tool = {
+                id: data.id,
+                sign: data.sign,
+                person: data.name,
+                status: data.status,
+                place: data.place,
+                info: {
+                    type: data.type,
+                    subtype: data.subtype,
+                    brand: data.brand,
+                    serial: data.serial
+                }
+            }
+            setTool(toSet)
+        }
+        getOne();
     }, [id]);
 
     if (!tool) return <Spinner />;
@@ -78,15 +96,27 @@ const ToolLocalEdit = () => {
         setTool(prev => ({ ...prev, place: e.target.value } as Tool))
     };
 
-    const submiter = () => {
+    const submiter = async () => {
         if (tool.person === '') {
             alert('docelowo komponent z błedem że musi być osoba odpowiedzialna');
             return;
         }
-        console.log('wysyłamy zmiany w stausach po edycji', tool);
+        const toSend = {
+            id: tool.id,
+            name: tool.person,
+            status: tool.status,
+            place: tool.place
+        }
+        await dataPoster(toSend, 'PATCH', 'tools');
+        setInfoVisible(true);
     }
 
-
+    const deleter = async () => {
+        if (window.confirm('Czy na pewno usunąć urządzenie z bazy ? Wraz z nim zostanie usunięta historia użytkowania')) {
+            await dataPoster({ id }, 'DELETE', 'tools');
+            window.location.href = '/';
+        }
+    }
 
     const options = users.map(user => user.name);
     const secondSelectOptions = Object.values(statusType)
@@ -115,7 +145,7 @@ const ToolLocalEdit = () => {
         : null;
 
     return (
-        <div className='Tool-edit--local'>
+        <div className='Tool-edit--local' onClick={() => { setInfoVisible(false) }}>
             <strong>Zmiana statusów dla urządzenia: {tool.info.type} typ: {tool.info.subtype} marki: {tool.info.brand}</strong>
             <p>Identyfikator w bazie danych: {tool.id}</p>
             <p>Numer seryjny: {tool.info.serial}</p>
@@ -142,8 +172,11 @@ const ToolLocalEdit = () => {
                     {place}
                 </section>
             </div>
+
             <Button link={false} title='Zapisz zmiany' addClass={buttonClass.IMPORTANT} func={submiter} />
             <Button link={true} title='powrót do listy urządzeń' addClass={buttonClass.SMALL} pref='/' ident='' />
+            <Button link={false} title='Usuń z bazy danych' addClass={buttonClass.SMALL} func={deleter} />
+            <InfoBox visible={infoVisible} name='Element' idn={id as string} action='e' />
         </div>
     );
 };

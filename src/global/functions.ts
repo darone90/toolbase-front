@@ -112,11 +112,13 @@ export const communicate = async (path: string, data: object): Promise<Login | u
     }
 }
 
-export const setSession = (token: string | null, loginStatus: boolean): void => {
+export const setSession = (token: string | null, loginStatus: boolean, user: string | null): void => {
     const loginState = loginStatus ? 'true' : 'false';
     const value = token ? token : '';
     sessionStorage.setItem('token', value);
     sessionStorage.setItem('loginStatus', loginState);
+    const User = user ? user : 'null'
+    sessionStorage.setItem('user', User)
 }
 
 export const getSession = (): Login => {
@@ -124,10 +126,12 @@ export const getSession = (): Login => {
     const token = data === undefined ? null : data;
     const loginStatus = sessionStorage.getItem('loginStatus') === 'true' ? true : false;
     const info = token ? 'Correct' : 'Uncorrect';
+    const user = sessionStorage.getItem('user');
 
     return {
         login: loginStatus,
         token,
-        info
+        info,
+        user
     }
 }

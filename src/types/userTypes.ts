@@ -1,4 +1,4 @@
-import { Tool } from "./toolsTypes";
+
 
 export interface User {
     name: string;
@@ -6,8 +6,14 @@ export interface User {
 }
 
 export interface HistoryList {
+
+    sign: string;
+    type: string;
+    subtype: string;
+    brand: string;
+    serial: string;
+    uuid: string;
     name: string;
-    tool: Tool;
-    from: string;
-    to: string;
+    start: string;
+    end?: string;
 }

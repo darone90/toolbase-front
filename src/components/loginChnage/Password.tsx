@@ -25,7 +25,7 @@ const Password = (props: Props) => {
                 Powtórz nowe hasło:
                 <input type="password" value={confirmNew} onChange={(e: ChangeEvent<HTMLInputElement>) => setConfirmNew(e.target.value)} />
             </label>
-            <button onClick={(e: MouseEvent<HTMLElement>) => { props.func(e, old, newPass, confirmNew) }} >Zapisz zmiany</button>
+            <button onClick={(e: MouseEvent<HTMLElement>) => { props.func(e, old, newPass, confirmNew); setOld(''); setNewPass(''); setConfirmNew('') }} >Zapisz zmiany</button>
         </form>
     );
 };

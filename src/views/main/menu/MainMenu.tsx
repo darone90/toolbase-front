@@ -9,7 +9,7 @@ const MainMenu = () => {
     const dispatch = useDispatch();
 
     const logoutFunc = () => {
-        setSession(null, false);
+        setSession(null, false, null);
         dispatch(appLogin({ loginStatus: false, token: null }));
     }
 

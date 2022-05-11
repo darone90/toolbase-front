@@ -22,7 +22,7 @@ const Login = (props: Props) => {
                 <input type="password" value={old} onChange={(e: ChangeEvent<HTMLInputElement>) => setOld(e.target.value)} />
             </label>
 
-            <button onClick={(e: MouseEvent<HTMLElement>) => { props.func(e, old, newLog) }}>Zapisz zmiany</button>
+            <button onClick={(e: MouseEvent<HTMLElement>) => { props.func(e, old, newLog); setOld(''); setNewLog('') }}>Zapisz zmiany</button>
         </form>
     );
 };

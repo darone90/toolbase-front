@@ -50,7 +50,7 @@ const ToolDataForm = (props: Props) => {
 
         if (status && person && sign && place) {
             const data: Local = {
-                person,
+                name: person,
                 sign,
                 place,
                 status,

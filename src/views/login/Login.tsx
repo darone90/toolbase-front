@@ -35,7 +35,7 @@ const Login = () => {
             setInfoVisible(false);
             setSpinnerVisible(true);
             const data = await communicate('/login', loginData) as LoginData;
-            setSession(data.token, data.login);
+            setSession(data.token, data.login, data.user);
             dispatch(appLogin({ loginStatus: data.login, token: data.token }));
             setInfoVisible(true);
             setSpinnerVisible(false);

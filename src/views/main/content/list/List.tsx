@@ -1,24 +1,41 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
-import { Tool as ToolType } from '../../../../types/toolsTypes';
+import { Tool as ToolType, incomingTool } from '../../../../types/toolsTypes';
 import Spinner from '../../../../components/general/loading/spinner';
-import { toolsList } from '../../../../data/tools';
 import Tool from '../../../../components/list/tool/Tool';
 import Searcher from '../../../../components/list/searcher/Searcher';
 import { filtering } from '../../../../global/functions';
+import { dataGetter } from '../../../../global/workersHandle';
 
 
 const List = () => {
 
-
-    const [list, setList] = useState<ToolType[]>([]);
+    const [list, setList] = useState<ToolType[] | null>(null);
     const [searchType, setSearchType] = useState<string>('type');
     const [text, setText] = useState<string>('');
 
 
+
     useEffect(() => {
-        console.log('strzał do api aby ustawić listę');
-        //potem to musi być async i osbna funkcja z poza komponentu
-        setList(toolsList);
+        const dataGET = async () => {
+            const data = await dataGetter('/tools');
+            const toSet: ToolType[] = data.map((tool: incomingTool) => {
+                return ({
+                    id: tool.id,
+                    sign: tool.sign,
+                    person: tool.name,
+                    status: tool.status,
+                    place: tool.place,
+                    info: {
+                        type: tool.type,
+                        subtype: tool.subtype,
+                        brand: tool.brand,
+                        serial: tool.serial
+                    }
+                })
+            })
+            setList(toSet);
+        }
+        dataGET();
     }, []);
 
 
@@ -33,7 +50,7 @@ const List = () => {
     };
 
 
-    if (list === []) return <Spinner />;
+    if (!list) return <Spinner />;
 
     const filtredList = filtering(list, searchType, text);
     const showList = filtredList ? filtredList.map(tool => <Tool tool={tool} key={tool.id} />) : null;
