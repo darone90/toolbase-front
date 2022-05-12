@@ -1,6 +1,6 @@
 import React, { useEffect, useState, MouseEvent, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Tool } from '../../types/toolsTypes';
 import { dataGetter, dataPoster } from '../../global/workersHandle';
 import Spinner from '../../components/general/loading/spinner';
@@ -26,6 +26,8 @@ enum flagsKeys {
 
 const ToolLocalEdit = () => {
 
+    const navigate = useNavigate();
+
     const [tool, setTool] = useState<Tool | null>(null);
     const [flags, setFlags] = useState<Flags>({ person: false, status: false, place: false })
     const [infoVisible, setInfoVisible] = useState<boolean>(false);
@@ -36,24 +38,29 @@ const ToolLocalEdit = () => {
 
     useEffect(() => {
         const getOne = async () => {
-            const data = await dataGetter(`/tools/${id}`)
-            const toSet: Tool = {
-                id: data.id,
-                sign: data.sign,
-                person: data.name,
-                status: data.status,
-                place: data.place,
-                info: {
-                    type: data.type,
-                    subtype: data.subtype,
-                    brand: data.brand,
-                    serial: data.serial
-                }
+            try {
+                const data = await dataGetter(`/tools/${id}`)
+                const toSet: Tool = {
+                    id: data.id,
+                    sign: data.sign,
+                    person: data.name,
+                    status: data.status,
+                    place: data.place,
+                    info: {
+                        type: data.type,
+                        subtype: data.subtype,
+                        brand: data.brand,
+                        serial: data.serial
+                    }
             }
             setTool(toSet)
+            } catch (err) {
+                if (err instanceof Error)
+                    navigate(`/error/${err.message}`)
+            }
         }
         getOne();
-    }, [id]);
+    }, [id, navigate]);
 
     if (!tool) return <Spinner />;
 
@@ -107,14 +114,24 @@ const ToolLocalEdit = () => {
             status: tool.status,
             place: tool.place
         }
-        await dataPoster(toSend, 'PATCH', 'tools');
-        setInfoVisible(true);
+        try {
+            await dataPoster(toSend, 'PATCH', 'tools');
+            setInfoVisible(true);
+        } catch (err) {
+            if (err instanceof Error)
+                navigate(`/error/${err.message}`)
+        }
     }
 
     const deleter = async () => {
         if (window.confirm('Czy na pewno usunąć urządzenie z bazy ? Wraz z nim zostanie usunięta historia użytkowania')) {
-            await dataPoster({ id }, 'DELETE', 'tools');
-            window.location.href = '/';
+            try {
+                await dataPoster({ id }, 'DELETE', 'tools');
+                navigate(`/`);
+            } catch (err) {
+                if (err instanceof Error)
+                    navigate(`/error/${err.message}`)
+            }
         }
     }
 

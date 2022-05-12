@@ -1,4 +1,5 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Tool as ToolType, incomingTool } from '../../../../types/toolsTypes';
 import Spinner from '../../../../components/general/loading/spinner';
 import Tool from '../../../../components/list/tool/Tool';
@@ -6,37 +7,41 @@ import Searcher from '../../../../components/list/searcher/Searcher';
 import { filtering } from '../../../../global/functions';
 import { dataGetter } from '../../../../global/workersHandle';
 
-
 const List = () => {
 
     const [list, setList] = useState<ToolType[] | null>(null);
     const [searchType, setSearchType] = useState<string>('type');
     const [text, setText] = useState<string>('');
 
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         const dataGET = async () => {
-            const data = await dataGetter('/tools');
-            const toSet: ToolType[] = data.map((tool: incomingTool) => {
-                return ({
-                    id: tool.id,
-                    sign: tool.sign,
-                    person: tool.name,
-                    status: tool.status,
-                    place: tool.place,
-                    info: {
-                        type: tool.type,
-                        subtype: tool.subtype,
-                        brand: tool.brand,
-                        serial: tool.serial
-                    }
+            try {
+                const data = await dataGetter('/tools');
+                const toSet: ToolType[] = data.map((tool: incomingTool) => {
+                    return ({
+                        id: tool.id,
+                        sign: tool.sign,
+                        person: tool.name,
+                        status: tool.status,
+                        place: tool.place,
+                        info: {
+                            type: tool.type,
+                            subtype: tool.subtype,
+                            brand: tool.brand,
+                            serial: tool.serial
+                        }
+                    })
                 })
-            })
-            setList(toSet);
+                setList(toSet);
+            } catch (err: unknown) {
+                if (err instanceof Error)
+                    navigate(`/error/${err.message}`)
+            }
         }
         dataGET();
-    }, []);
+    }, [navigate]);
 
 
     const setSearching = (e: ChangeEvent<HTMLSelectElement>) => {

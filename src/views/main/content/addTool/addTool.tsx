@@ -1,4 +1,5 @@
 import React, { useState, MouseEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ToolTechnicalForm from '../../../../components/addtool/ToolTechnicalForm';
 import ToolDataForm from '../../../../components/addtool/ToolDataForm';
 import { Technical, Local } from '../../../../types/toolsTypes';
@@ -8,6 +9,8 @@ import InfoBox from '../../../../components/general/informationBox/InfoBox';
 
 
 const AddTool = () => {
+
+    const navigate = useNavigate();
 
     const [technicalInfo, setTechnicalInfo] = useState<Technical | null>(null);
     const [localInfo, setLocalInfo] = useState<Local | null>(null);
@@ -29,12 +32,16 @@ const AddTool = () => {
             ...localInfo,
             ...technicalInfo
         };
-
-        const id = await dataPoster(dataToSend, 'POST', 'tools');
-        setId(id as string);
-        setInfoVisible(true);
-        setTechnicalInfo(null);
-        setLocalInfo(null);
+        try {
+            const id = await dataPoster(dataToSend, 'POST', 'tools');
+            setId(id as string);
+            setInfoVisible(true);
+            setTechnicalInfo(null);
+            setLocalInfo(null);
+        } catch (err) {
+            if (err instanceof Error)
+                navigate(`/error/${err.message}`)
+        }
     }
 
     const validation = technicalInfo && localInfo ? false : true;

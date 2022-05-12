@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState, MouseEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { ToolsNames } from '../../types/toolsTypes';
 import NameSection from './NameSection';
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const EditExistedForm = (props: Props) => {
+
+    const navigate = useNavigate();
 
     const [newSubtypes, setNewSubtypes] = useState<string[]>([]);
     const [newSubtype, setNewSubtype] = useState<string>('');
@@ -69,8 +72,7 @@ const EditExistedForm = (props: Props) => {
                 setNewSubtype('');
             } catch (error: unknown) {
                 if (error instanceof Error)
-                    window.location.href = `/error/${error.message}`;
-                //send info about error to error log
+                    navigate(`/error/${error.message}`)
             }
         }
     };
@@ -85,8 +87,7 @@ const EditExistedForm = (props: Props) => {
             }
         } catch (error: unknown) {
             if (error instanceof Error)
-                window.location.href = `/error/${error.message}`;
-            //send info about error to error log
+                navigate(`/error/${error.message}`)
         }
     };
 
@@ -104,8 +105,7 @@ const EditExistedForm = (props: Props) => {
                     };
                 } catch (error: unknown) {
                     if (error instanceof Error)
-                        window.location.href = `/error/${error.message}`;
-                    //send info about error to error log
+                        navigate(`/error/${error.message}`)
                 }
             }
         }

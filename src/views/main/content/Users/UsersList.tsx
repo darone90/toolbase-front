@@ -1,5 +1,6 @@
 import React, { useEffect, useState, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../../../store';
 import { User as UserType } from '../../../../types/userTypes';
 import User from '../../../../components/userList/User';
@@ -11,6 +12,7 @@ import { addOne, deleteOne } from '../../../../features/user-slice';
 const UsersList = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [usersList, setUsersList] = useState<UserType[]>([]);
     const [infoVisible, setInfoVisible] = useState<boolean>(false);
@@ -25,24 +27,34 @@ const UsersList = () => {
 
     const deleter = async (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
-        const id = (e.target as Element).id;
-        const ID = await dataPoster({ id }, "DELETE", 'workers') as string
-        if (ID) {
-            setInfoVisible(true);
-            setId(ID);
-            setAction('d');
-            dispatch(deleteOne(ID));
+        try {
+            const id = (e.target as Element).id;
+            const ID = await dataPoster({ id }, "DELETE", 'workers') as string
+            if (ID) {
+                setInfoVisible(true);
+                setId(ID);
+                setAction('d');
+                dispatch(deleteOne(ID));
+            }
+        } catch (err) {
+            if (err instanceof Error)
+                navigate(`/error/${err.message}`)
         }
     };
 
     const submiter = async (e: MouseEvent<HTMLElement>, user: string) => {
         e.preventDefault();
-        const id = await dataPoster({ name: user }, 'POST', 'workers') as string
-        if (id) {
-            setInfoVisible(true);
-            setId(id);
-            setAction('a');
-            dispatch(addOne({ name: user, id }))
+        try {
+            const id = await dataPoster({ name: user }, 'POST', 'workers') as string
+            if (id) {
+                setInfoVisible(true);
+                setId(id);
+                setAction('a');
+                dispatch(addOne({ name: user, id }))
+            }
+        } catch (err) {
+            if (err instanceof Error)
+                navigate(`/error/${err.message}`)
         }
     };
 

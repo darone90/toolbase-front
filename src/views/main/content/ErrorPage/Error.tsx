@@ -10,7 +10,7 @@ const Error = () => {
 
     return (
         <div>
-            <h2>Błąd!</h2>
+            <h2>Przepraszamy wystąpił błąd...</h2>
             <p>{text}</p>
         </div>
     );

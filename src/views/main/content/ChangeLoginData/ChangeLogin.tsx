@@ -1,4 +1,5 @@
 import React, { MouseEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Password from '../../../../components/loginChnage/Password';
 import Login from '../../../../components/loginChnage/Login';
 import { getSession } from '../../../../global/functions';
@@ -6,6 +7,8 @@ import { dataPoster } from '../../../../global/workersHandle';
 import Spinner from '../../../../components/general/loading/spinner';
 
 const ChangeLogin = () => {
+
+    const navigate = useNavigate();
 
     const [information, setInformation] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
@@ -31,7 +34,8 @@ const ChangeLogin = () => {
                 setInformation('Dane zapisane poprawnie!')
             }
         } catch (err) {
-            //obsługa błędu
+            if (err instanceof Error)
+                navigate(`/error/${err.message}`)
         }
     }
 
@@ -54,10 +58,10 @@ const ChangeLogin = () => {
                 setInformation('Dane zapisane poprawnie!')
             }
         } catch (err) {
-            //obsługa błędu
+            if (err instanceof Error)
+                navigate(`/error/${err.message}`)
         }
     }
-
 
     return (
         <div className='Login-change' onClick={() => { setInformation('') }}>

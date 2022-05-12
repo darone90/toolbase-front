@@ -32,12 +32,14 @@ export const listDeleter = async (id: string): Promise<string | undefined> => {
             body: JSON.stringify({ id })
         });
         const idn = await data.json();
+        if (idn.error) {
+            throw new Error('Wystąpił błąd po stronie serwera... Spróbuj ponownie za chwilę');
+        }
         return idn.id as string
 
     } catch (error: unknown) {
         if (error instanceof Error)
-            window.location.href = `/error/${error.message}`;
-        //send info about error to error log
+            throw new Error('Przepraszamy wystąpił nieoczekiwany błąd po twojej stronie, sprawdź połączenie z internetem, lub spróbuj za chwilę');
     }
 }
 
@@ -49,12 +51,14 @@ export const listPatcher = async (id: string, subtype: string) => {
             body: JSON.stringify({ id, subtype })
         });
         const idn = await data.json();
+        if (idn.error) {
+            throw new Error('Wystąpił błąd po stronie serwera... Spróbuj ponownie za chwilę');
+        }
         return idn.id as string
 
     } catch (error: unknown) {
         if (error instanceof Error)
-            window.location.href = `/error/${error.message}`;
-        //send info about error to error log
+            throw new Error('Przepraszamy wystąpił nieoczekiwany błąd po twojej stronie, sprawdź połączenie z internetem, lub spróbuj za chwilę');
     }
 }
 
@@ -66,12 +70,14 @@ export const listPoster = async (data: ToolsNames, method: string): Promise<stri
             body: JSON.stringify(data)
         });
         const id = await income.json();
+        if (id.error) {
+            throw new Error('Wystąpił błąd po stronie serwera... Spróbuj ponownie za chwilę');
+        }
         return id.id as string
 
     } catch (error: unknown) {
         if (error instanceof Error)
-            window.location.href = `/error/${error.message}`;
-        //send info about error to error log
+            throw new Error('Przepraszamy wystąpił nieoczekiwany błąd po twojej stronie, sprawdź połączenie z internetem, lub spróbuj za chwilę');
     }
 }
 
@@ -90,8 +96,7 @@ export const listGetter = async (path: string): Promise<ToolsNames[] | undefined
         return list
     } catch (error: unknown) {
         if (error instanceof Error)
-            window.location.href = `/error/${error.message}`;
-        //send info about error to error log
+            throw new Error('Przepraszamy wystąpił nieoczekiwany błąd po twojej stronie, sprawdź połączenie z internetem, lub spróbuj za chwilę');
     }
 }
 

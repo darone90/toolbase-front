@@ -5,8 +5,11 @@ import { listPoster } from '../../global/functions';
 import InfoBox from '../general/informationBox/InfoBox';
 import { loadOne } from '../../features/toolTypes-slice';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const AddTypeForm = () => {
+
+    const navigate = useNavigate();
 
     const [newType, setNewType] = useState<string>('');
     const [id, setId] = useState<string>('');
@@ -47,8 +50,7 @@ const AddTypeForm = () => {
                 setNewType('');
             } catch (error: unknown) {
                 if (error instanceof Error)
-                    window.location.href = `/error/${error.message}`;
-                //send info about error to error log
+                    navigate(`/error/${error.message}`)
             }
 
         }

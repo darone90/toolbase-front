@@ -4,6 +4,7 @@ import { HistoryList as hList } from '../../types/userTypes';
 import HistoryRecord from './HistoryRecord';
 import Spinner from '../general/loading/spinner';
 import { dataGetter, dataPoster } from '../../global/workersHandle';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -13,7 +14,7 @@ interface Props {
 
 const HistoryList = (props: Props) => {
 
-
+    const navigate = useNavigate();
 
     const [history, setHistory] = useState<hList[] | null>(null);
     const [showActual, setShowActual] = useState<boolean>(false);
@@ -24,32 +25,51 @@ const HistoryList = (props: Props) => {
 
     useEffect(() => { 
         const getHistory = async () => {
-            const list = await dataGetter(`/history/archived/${props.finded?.name}`);
-            if (list) setHistory(list);
+            try {
+                const list = await dataGetter(`/history/archived/${props.finded?.name}`);
+                if (list) setHistory(list);
+            } catch (err) {
+                if (err instanceof Error)
+                    navigate(`/error/${err.message}`)
+            }
         };
         getHistory();
-    }, [props.finded?.name])
+    }, [props.finded?.name, navigate])
 
     const clearHistory = async (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
-
-        await dataPoster({ name: props.finded?.name }, 'DELETE', `history`);
-        setHistory([]);
+        try {
+            await dataPoster({ name: props.finded?.name }, 'DELETE', `history`);
+            setHistory([]);
+        } catch (err) {
+            if (err instanceof Error)
+                navigate(`/error/${err.message}`)
+        }   
     }
 
     const getActual = async (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
         setHistory([])
-        const data = await dataGetter(`/history/actual/${props.finded?.name}`)
-        setHistory(data)
-        setShowActual(true)
+        try {
+            const data = await dataGetter(`/history/actual/${props.finded?.name}`)
+            setHistory(data)
+            setShowActual(true)
+        } catch (err) {
+            if (err instanceof Error)
+                navigate(`/error/${err.message}`)
+        }
     }
 
     const getArchived = async (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
-        const list = await dataGetter(`/history/archived/${props.finded?.name}`);
-        setHistory(list);
-        setShowActual(false)
+        try {
+            const list = await dataGetter(`/history/archived/${props.finded?.name}`);
+            setHistory(list);
+            setShowActual(false)
+        } catch (err) {
+            if (err instanceof Error)
+                navigate(`/error/${err.message}`)
+        }
     }
 
     const result = history === null || history.length < 1 ?

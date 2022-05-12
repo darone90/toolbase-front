@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, MouseEvent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/general/button/Button';
 import { buttonClass } from '../../types/styleTypes';
 import { appLogin } from '../../features/login-slice';
@@ -14,6 +15,8 @@ interface ForLogin {
 };
 
 const Login = () => {
+
+    const navigate = useNavigate();
 
     const [infoVisible, setInfoVisible] = useState<boolean>(false);
     const [spinnerVisible, setSpinnerVisible] = useState<boolean>(false);
@@ -41,8 +44,7 @@ const Login = () => {
             setSpinnerVisible(false);
         } catch (error: unknown) {
             if (error instanceof Error)
-                return //dopisać bez przekierowania bład
-            //send info about error to error log
+                navigate(`/error/${error.message}`)
         }
     };
 
