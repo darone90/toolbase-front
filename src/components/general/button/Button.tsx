@@ -2,6 +2,8 @@ import React, { MouseEvent } from 'react';
 import { buttonClass } from '../../../types/styleTypes';
 import { Link } from 'react-router-dom';
 
+import './Button.scss';
+
 
 interface Props {
     ident?: string;

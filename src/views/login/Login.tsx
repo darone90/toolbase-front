@@ -1,6 +1,5 @@
 import React, { useState, ChangeEvent, MouseEvent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import Button from '../../components/general/button/Button';
 import { buttonClass } from '../../types/styleTypes';
 import { appLogin } from '../../features/login-slice';
@@ -9,6 +8,9 @@ import { Login as LoginData } from '../../types/loginTypes';
 import Spinner from '../../components/general/loading/spinner';
 import { setSession, getSession } from '../../global/functions';
 
+import './Login.scss';
+import logo from './techglass_logo.png';
+
 interface ForLogin {
     login: string;
     password: string;
@@ -16,7 +18,7 @@ interface ForLogin {
 
 const Login = () => {
 
-    const navigate = useNavigate();
+
 
     const [infoVisible, setInfoVisible] = useState<boolean>(false);
     const [spinnerVisible, setSpinnerVisible] = useState<boolean>(false);
@@ -44,7 +46,8 @@ const Login = () => {
             setSpinnerVisible(false);
         } catch (error: unknown) {
             if (error instanceof Error)
-                navigate(`/error/${error.message}`)
+                console.log(error)
+                //dopisac obsluge blędu bez navigate
         }
     };
 
@@ -55,10 +58,13 @@ const Login = () => {
         }))
     }
 
-    const loginInfoBox = <div><strong>Niepoprawny login lub hasło</strong></div>;
+    const loginInfoBox = <div className='login__info'><strong>Niepoprawny login lub hasło</strong></div>;
 
     return (
         <div className='login'>
+            <div className="login__logo">
+                <img src={logo} alt="techglass logo" />
+            </div>
             <form>
                 <label>
                     Login:

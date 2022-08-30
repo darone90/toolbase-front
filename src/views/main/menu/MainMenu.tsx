@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { appLogin } from '../../../features/login-slice';
 import { setSession } from '../../../global/functions';
 
+import './MainMenu.scss';
+
 const MainMenu = () => {
 
     const dispatch = useDispatch();

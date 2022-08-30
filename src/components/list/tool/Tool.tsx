@@ -4,6 +4,8 @@ import Information from './Information';
 import Button from '../../general/button/Button';
 import { buttonClass } from '../../../types/styleTypes';
 
+import './Tool.scss';
+
 
 interface Props {
     tool: ToolType

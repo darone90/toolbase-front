@@ -7,6 +7,8 @@ import Searcher from '../../../../components/list/searcher/Searcher';
 import { filtering } from '../../../../global/functions';
 import { dataGetter } from '../../../../global/workersHandle';
 
+import './List.scss';
+
 const List = () => {
 
     const [list, setList] = useState<ToolType[] | null>(null);

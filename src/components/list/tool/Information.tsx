@@ -11,7 +11,7 @@ const Information = (props: Props) => {
 
     return (
         <div className='Tool__information'>
-            <h2>Aktualne informację</h2>
+            <h2>{info.type} {info.subtype}</h2>
 
             <strong>Grawer lub oznacznie: {sign}</strong>
 

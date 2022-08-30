@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import MainMenu from './menu/MainMenu';
 import Header from './header/Header';
 import Content from './content/Content';
@@ -13,12 +12,13 @@ import { User } from '../../types/userTypes';
 import { listGetter } from '../../global/functions';
 import { dataGetter } from '../../global/workersHandle';
 
+import "./Main.scss";
+
 const Main = () => {
 
     const [loading, setLoading] = useState<boolean>(true);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const downloadToolsNamesList = async () => {
         try {
@@ -26,7 +26,7 @@ const Main = () => {
             if (data) { dispatch(loadAll(data)) }
         } catch (err) {
             if (err instanceof Error)
-                navigate(`/error/${err.message}`)
+                window.location.href = `/error/${err.message}`;
         }
     };
 
@@ -36,7 +36,7 @@ const Main = () => {
             if (data) { dispatch(userLoad(data)) }
         } catch (err) {
             if (err instanceof Error)
-                navigate(`/error/${err.message}`)
+                window.location.href = `/error/${err.message}`;
         }  
     }
 

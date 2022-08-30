@@ -1,0 +1,38 @@
+.Header {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: 3px solid rgb(43, 43, 241);
+    box-shadow: 0 5px 15px rgb(43, 43, 241);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    h1 {
+        display: block;
+        width: 55%;
+    }
+
+    &__img {
+        width: 25%;
+
+        img {
+            width: 80%;
+        }
+    }
+
+    &__clock {
+        position: relative;
+        width: 20%;
+        padding: 5px;
+
+        time {
+            position: absolute;
+            width: 100%;
+            left: 50%;
+            top: 55%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

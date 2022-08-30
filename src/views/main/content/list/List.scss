@@ -1,0 +1,17 @@
+.List {
+    padding: 4%;
+
+    &__search {
+        height: 10%;
+        padding: 30px;
+        border-bottom: 1px solid black;
+        box-shadow: 0, 2px 10px black;
+    }
+
+    &__show {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+}

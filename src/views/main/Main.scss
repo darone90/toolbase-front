@@ -1,0 +1,27 @@
+.Main-window {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 15% 25% 25% 35%;
+    grid-template-rows: 20% 39% 39% 2%;
+    grid-template-areas:
+        "header header header header"
+        "menu content content content"
+        "menu content content content"
+        "footer footer footer footer";
+}
+
+.Header {
+    grid-area: header;
+}
+
+.Menu-main {
+    grid-area: menu;
+}
+
+.content {
+    grid-area: content;
+}
+
+.Footer {
+    grid-area: footer;
+}
