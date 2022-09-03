@@ -33,6 +33,16 @@
             left: 50%;
             top: 55%;
             transform: translate(-50%, -50%);
+            @media screen and (max-width: 480px) {
+                    left: 40%;
+                }
+            }
+            }
+            
+            @media screen and (max-width: 480px) {
+                h1 {
+                    font-size: 1em;
+                    margin-top: 2em;
         }
     }
 }

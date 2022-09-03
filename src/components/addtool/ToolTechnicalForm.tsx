@@ -5,6 +5,8 @@ import { ToolsNames, Technical } from '../../types/toolsTypes';
 import Spinner from '../general/loading/spinner';
 import Select from '../general/select/Select';
 
+import './ToolTechnicalForm.scss';
+
 interface Props {
     addTechnicalInfo: (data: Technical) => void
 }
@@ -56,7 +58,7 @@ const ToolTechnicalForm = (props: Props) => {
     const validation = brand === '' || serial === '' || selectedTool === null || selectedSubtype === '' ? true : false;
 
     return (
-        <div>
+        <div className='Technical-form'>
             <form>
                 <Select title='Wybierz rodzaj urządzenia'
                     name='type'

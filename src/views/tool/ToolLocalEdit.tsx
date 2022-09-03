@@ -11,6 +11,8 @@ import Button from '../../components/general/button/Button';
 import { buttonClass } from '../../types/styleTypes';
 import InfoBox from '../../components/general/informationBox/InfoBox';
 
+import './ToolLocalEdit.scss';
+
 
 interface Flags {
     person: boolean;

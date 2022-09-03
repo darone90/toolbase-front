@@ -9,6 +9,10 @@ const AddSubtypeForm = (props: Props) => {
     const [subtype, setSubtype] = useState<string>('');
 
     const getSubtype = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value.includes(' ')) {
+            window.alert('Nie można stosować spacji, typ musi być jednym ciągiem znaków');
+            return;
+        }
         setSubtype(e.target.value)
     }
 
@@ -19,7 +23,7 @@ const AddSubtypeForm = (props: Props) => {
     const validation = subtype.length > 2 ? false : true;
 
     return (
-        <div className='Add-type__subtype'>
+        <div className='Type-add__subtype'>
             <label>
                 Podaj nowy typ dla urządzenia { }:
                 <input type="text" value={subtype} onChange={getSubtype} />

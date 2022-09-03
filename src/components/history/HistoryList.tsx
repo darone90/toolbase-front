@@ -6,7 +6,7 @@ import Spinner from '../general/loading/spinner';
 import { dataGetter, dataPoster } from '../../global/workersHandle';
 import { useNavigate } from 'react-router-dom';
 
-
+import './HistoryList.scss';
 
 interface Props {
     finded: User | null;
@@ -18,8 +18,6 @@ const HistoryList = (props: Props) => {
 
     const [history, setHistory] = useState<hList[] | null>(null);
     const [showActual, setShowActual] = useState<boolean>(false);
-
-    console.log(history)
 
     if (!history) <Spinner />;
 

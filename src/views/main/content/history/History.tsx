@@ -4,6 +4,7 @@ import { RootState } from '../../../../store';
 import { User } from '../../../../types/userTypes';
 import HistoryList from '../../../../components/history/HistoryList';
 
+import './History.scss'
 
 const History = () => {
 

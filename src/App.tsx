@@ -3,7 +3,7 @@ import Login from './views/login/Login';
 import { RootState } from './store';
 import Main from './views/main/Main';
 
-
+import './App.scss';
 
 const App = () => {
 
@@ -13,7 +13,7 @@ const App = () => {
   const view = loginStatus ? <Main /> : <Login />
 
   return (
-    <div>
+    <div className='App'>
       {view}
     </div>
   );

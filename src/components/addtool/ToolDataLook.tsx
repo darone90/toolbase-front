@@ -1,5 +1,7 @@
 import React, { MouseEvent } from 'react';
-import { Technical, Local } from '../../types/toolsTypes'
+import { Technical, Local } from '../../types/toolsTypes';
+
+import './ToolDataLook.scss';
 
 interface Props {
     technical: Technical | null;
@@ -19,7 +21,7 @@ const ToolDataLook = (props: Props) => {
                 <li>Typ: {props.technical.subtype}</li>
             </ul>
         </div>
-        : <div>Wprowadź dane nowego urządzenia</div>;
+        : <div className='New-tool__technical'>Wprowadź dane nowego urządzenia</div>;
 
     const local = props.local ?
         <div className='New-tool__local'>
@@ -30,7 +32,7 @@ const ToolDataLook = (props: Props) => {
                 <li>Oznaczenie / grawer: {props.local.sign}</li>
             </ul>
         </div>
-        : <div>Wprowadź dane nowego urządzenia</div>
+        : <div className='New-tool__local'>Wprowadź dane nowego urządzenia</div>
 
     return (
         <div className='New-tool'>

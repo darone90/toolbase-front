@@ -4,6 +4,7 @@ import { statusType, Local } from '../../types/toolsTypes';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
+import './ToolDataForm.scss';
 
 interface Props {
     getToolData: (data: Local) => void
@@ -64,6 +65,7 @@ const ToolDataForm = (props: Props) => {
     const validation = status === '' || person === '' || sign === '' || place === '' ? true : false;
 
     return (
+        <div className="Data-form">
         <form>
             <Select title='Wybierz status urządzenia: '
                 name='status'
@@ -86,6 +88,7 @@ const ToolDataForm = (props: Props) => {
             </label>
             <button disabled={validation} onClick={submiter}>Dodaj dane...</button>
         </form>
+        </div>
     );
 };
 

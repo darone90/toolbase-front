@@ -7,6 +7,8 @@ import ToolDataLook from '../../../../components/addtool/ToolDataLook';
 import { dataPoster } from '../../../../global/workersHandle';
 import InfoBox from '../../../../components/general/informationBox/InfoBox';
 
+import './addTool.scss';
+
 
 const AddTool = () => {
 

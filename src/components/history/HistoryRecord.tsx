@@ -11,11 +11,8 @@ const HistoryRecord = (props: Props) => {
     return (
         <li>
             <strong>{name}</strong>
-            <p>Użytkowane urządzenie
-                {type} {subtype}
-                Marki: {brand}
-            </p>
-            <p>Odpowiedzialny od {start} do {end ? end : 'Aktualnie'}</p>
+            <p><strong> Użytkowane urządzenie:</strong> {type} {subtype} <strong>Marki</strong>: {brand}</p>
+            <p>Odpowiedzialny od {start.slice(0, 10)} do {end ? end.slice(0, 10) : 'Aktualnie'}</p>
             <strong>Oznaczenie: {sign}</strong>
             <p>Numer seryjny: {serial}</p>
         </li>

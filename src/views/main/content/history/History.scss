@@ -1,0 +1,16 @@
+.History {
+    margin: 5% 0 10% 10%;
+
+    &__searcher {
+        input {
+            margin-left: 1em;
+        }
+
+        button {
+            margin-left: 1em;
+            background-color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+    }
+}

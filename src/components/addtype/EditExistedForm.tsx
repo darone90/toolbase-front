@@ -6,7 +6,9 @@ import { ToolsNames } from '../../types/toolsTypes';
 import NameSection from './NameSection';
 import { listPatcher, listDeleter, listPoster } from '../../global/functions';
 import InfoBox from '../general/informationBox/InfoBox';
-import { changeOne, deleteSubtype, deleteType } from '../../features/toolTypes-slice';
+import { addOneSubtype, changeOne, deleteSubtype, deleteType } from '../../features/toolTypes-slice';
+
+import './EditExistedForm.scss';
 
 interface Props {
     selected: string
@@ -32,17 +34,28 @@ const EditExistedForm = (props: Props) => {
     };
 
     const getNewName = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value.includes(' ')) {
+            window.alert('Nie można stosować spacji, typ musi być jednym ciągiem znaków');
+            return;
+        }
         setNewName(e.target.value);
     };
 
     const getNewSubtype = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value.includes(' ')) {
+            window.alert('Nie można stosować spacji, typ musi być jednym ciągiem znaków');
+            return;
+        }
         setNewSubtype(e.target.value);
     };
 
     const getNewSubtypes = (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
         if (newSubtype) {
-            setNewSubtypes(prev => [...prev, newSubtype])
+            if (tool) {
+                const id = tool.id as string;
+                dispatch(addOneSubtype({ id, newSubtype }))
+            }  
         }
     }
 
@@ -82,6 +95,10 @@ const EditExistedForm = (props: Props) => {
             if (tool) {
                 const id = tool.id as string;
                 const subtype = (e.target as Element).classList[0];
+                if (tool.subtypes.length === 1) {
+                    window.alert('Narzędzie musi posiadać przynajmniej jeden podtyp. Najpierw zapisz zmiany z nowymi typami.');
+                    return;
+                }
                 await listPatcher(id, subtype);
                 dispatch(deleteSubtype({ id, subtype }));
             }
@@ -120,7 +137,7 @@ const EditExistedForm = (props: Props) => {
         : null
 
     return (
-        <div onClick={() => { setInfoBoxVisible(false); setIdno('') }}>
+        <div className='Type-add__edit' onClick={() => { setInfoBoxVisible(false); setIdno('') }}>
             <NameSection func={nameInputHandler}
                 nameInput={nameInput}
                 actualName={toolName}

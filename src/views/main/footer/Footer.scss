@@ -1,0 +1,14 @@
+.Footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: blue;
+    color: white;
+    padding-left: 2em;
+    line-height: 1.5em;
+    height: 1.5em;
+
+    @media screen and (max-width: 480px) {
+        font-size: 0.7em;
+    }
+}

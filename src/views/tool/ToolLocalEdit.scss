@@ -1,0 +1,36 @@
+.Tool-edit--local {
+    margin: 5% 0 7% 10%;
+    font-family: Arial, Helvetica, sans-serif;
+
+    button.important {
+        height: 2.2em;
+    }
+
+    strong {
+        line-height: 2em;
+        font-size: 1.2em;
+    }
+
+    &__data {
+        padding-top: 3%;
+        border-top: 2px solid gray;
+
+        section {
+            margin: 20px 0 0 0;
+
+            button {
+                margin-left: 2em;
+                background-color: white;
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 5px 20px;
+                cursor: pointer;
+                transition: 0.4s;
+
+                &:hover {
+                    background-color: blue;
+                    color: white;
+                }
+            }
+        }
+    }
+}

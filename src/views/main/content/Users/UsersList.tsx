@@ -9,6 +9,8 @@ import { dataPoster } from '../../../../global/workersHandle';
 import InfoBox from '../../../../components/general/informationBox/InfoBox';
 import { addOne, deleteOne } from '../../../../features/user-slice';
 
+import './UsersList.scss';
+
 const UsersList = () => {
 
     const dispatch = useDispatch();

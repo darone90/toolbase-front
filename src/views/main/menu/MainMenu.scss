@@ -30,4 +30,18 @@
             }
         }
     }
+@media screen and (max-width: 480px) {
+    h2 {
+        margin-left: 1em;
+    }
+
+    ul {
+        width: 80%;
+        border-right: none;
+
+        li {
+            margin: 10px 0;
+        }
+    }
+}
 }

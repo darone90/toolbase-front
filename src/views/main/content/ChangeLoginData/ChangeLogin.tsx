@@ -6,6 +6,8 @@ import { getSession } from '../../../../global/functions';
 import { dataPoster } from '../../../../global/workersHandle';
 import Spinner from '../../../../components/general/loading/spinner';
 
+import './ChangeLogin.scss';
+
 const ChangeLogin = () => {
 
     const navigate = useNavigate();

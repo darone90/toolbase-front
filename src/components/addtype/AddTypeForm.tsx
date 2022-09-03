@@ -7,6 +7,8 @@ import { loadOne } from '../../features/toolTypes-slice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import './AddTypeForm.scss';
+
 const AddTypeForm = () => {
 
     const navigate = useNavigate();
@@ -18,6 +20,12 @@ const AddTypeForm = () => {
 
     const dispatch = useDispatch();
 
+    const removeSubtype = (e: MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+        const newSubtypesList = finalData.subtypes.filter(sub => sub !== (e.target as Element).classList[0]);
+        setFinalData({ name: finalData.name, subtypes: newSubtypesList });
+    }
+
     const addName = (e: MouseEvent<HTMLElement>) => {
         e.preventDefault()
         setFinalData(prev => ({ ...prev, name: newType }))
@@ -26,6 +34,10 @@ const AddTypeForm = () => {
 
     const getNewType = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
+        if (e.target.value.includes(' ')) {
+            window.alert('Nie można stosować spacji, typ musi być jednym ciągiem znaków');
+            return;
+        }
         setNewType(e.target.value)
     };
 
@@ -59,7 +71,7 @@ const AddTypeForm = () => {
     const btnValidation = finalData.name && finalData.subtypes.length > 0 ? false : true;
 
     const subtypeList = finalData.subtypes.length > 0 ?
-        finalData.subtypes.map((subtype, i) => <li key={i}>{subtype}<button className={subtype}>Usuń z listy</button></li>)
+        finalData.subtypes.map((subtype, i) => <li key={i}>{subtype}<button className={subtype} onClick={removeSubtype}>Usuń z listy</button></li>)
         : null;
 
     return (

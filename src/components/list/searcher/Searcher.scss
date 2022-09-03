@@ -6,5 +6,12 @@
 
     &__type {
         margin-right: 20px;
+@media screen and (max-width: 480px) {
+        margin-bottom: 1em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    flex-wrap: wrap;
     }
 }

@@ -1,0 +1,18 @@
+.Type-add {
+    padding-top: 2em;
+
+    &__subtype {
+        margin-top: 2em;
+    }
+
+    input {
+        margin-left: 1em;
+    }
+
+    button {
+        background: white;
+        padding: 2px 10px;
+        cursor: pointer;
+        margin-left: 1em;
+    }
+}

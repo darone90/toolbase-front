@@ -8,6 +8,15 @@
         "menu content content content"
         "menu content content content"
         "footer footer footer footer";
+@media screen and (max-width: 480px) {
+        grid-template-columns: 100%;
+
+        grid-template-areas:
+            "header"
+            "menu"
+            "content"
+            "footer";
+    }
 }
 
 .Header {

@@ -1,0 +1,31 @@
+.Users-list {
+    margin: 5% 0 0 10%;
+
+    button {
+        background-color: white;
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+
+    ul {
+        li {
+            margin-bottom: 2em;
+        }
+    }
+}
+
+.User-add {
+    margin-left: 10%;
+    margin-bottom: 10%;
+
+    input {
+        margin-left: 1em;
+    }
+
+    button {
+        margin-left: 1em;
+        background-color: white;
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+}

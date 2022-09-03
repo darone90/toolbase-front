@@ -16,6 +16,13 @@ interface OneLoad {
     payload: ToolsNames
 }
 
+interface oneAdd {
+    payload: {
+        id: string;
+        newSubtype: string;
+    }
+}
+
 interface Initial {
     list: ToolsNames[]
 }
@@ -38,6 +45,12 @@ export const toolTypeSlice = createSlice({
             const filered = state.list.filter(el => el.id !== action.payload.id);
             state.list = [...filered, action.payload];
         },
+        addOneSubtype: (state, action: oneAdd) => {
+            const tool = state.list.find(el => el.id == action.payload.id);
+            if (tool)
+                tool.subtypes = [...tool?.subtypes as string[], action.payload.newSubtype]
+        },
+
         deleteSubtype: (state, action: SubtypeDelete) => {
             const filered = state.list.filter(el => el.id !== action.payload.id);
             const edited = state.list.find(el => el.id === action.payload.id);
@@ -51,4 +64,4 @@ export const toolTypeSlice = createSlice({
     }
 })
 
-export const { loadAll, loadOne, changeOne, deleteSubtype, deleteType } = toolTypeSlice.actions
+export const { loadAll, loadOne, changeOne, deleteSubtype, deleteType, addOneSubtype } = toolTypeSlice.actions

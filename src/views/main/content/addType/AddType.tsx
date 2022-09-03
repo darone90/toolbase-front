@@ -7,6 +7,8 @@ import { RootState } from '../../../../store';
 import AddTypeForm from '../../../../components/addtype/AddTypeForm';
 import EditExistedForm from '../../../../components/addtype/EditExistedForm';
 
+import './AddType.scss';
+
 const AddType = () => {
 
     const [newTypeView, setNewTypeView] = useState<boolean>(false);
@@ -30,20 +32,20 @@ const AddType = () => {
 
     return (
         <div className='Add-type'>
-            <div>
+            <div className='Add-type__new'> 
                 Dodaj nowy rodzaj urządzenia:
                 <Button link={false} title='Dodaj nowy rodzaj'
                     addClass={buttonClass.SMALL}
                     func={newTypeViewHandler} />
             </div>
-            <div>
+            <div className='Add-type__existing'>
                 <Select title='Lub wybierz już istniejący aby dodać kolejny typ:'
                     name='types'
                     options={options}
                     value={selectedType}
                     getValue={getSelected} />
             </div>
-            <div>
+            <div className='Add-type__edit'>
                 {newTypeView ? <AddTypeForm /> : null}
                 {!newTypeView && selectedType !== '' ? <EditExistedForm selected={selectedType} /> : null}
 
