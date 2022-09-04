@@ -6,9 +6,16 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     margin-top: 20px;
 
-    @media screen and (max-width: 480px) {
-            width: 100%;
+    @media screen and (max-width: 1200px) {
+        width: 45%;
+
+    }
+
+    @media screen and (max-width: 1024px) {
+            width: 90%;
+
         }
+
     &__information {
         strong {
             margin: 10px 0;

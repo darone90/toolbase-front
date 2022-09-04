@@ -67,23 +67,23 @@ const ToolDataForm = (props: Props) => {
     return (
         <div className="Data-form">
         <form>
-            <Select title='Wybierz status urządzenia: '
+                <Select title='Status urządzenia: '
                 name='status'
                 options={options}
                 value={status}
                 getValue={getValue}
             />
-            <Select title='Wybierz osobę odpowiedzialną: '
+                <Select title='Osoba odpowiedzialna: '
                 name='person'
                 options={persons}
                 value={person}
                 getValue={getPerson} />
             <label>
-                Oznaczenie / grawer:
+                    Oznaczenie:
                 <input type="text" value={sign} onChange={getSign} />
             </label>
             <label>
-                Miejsce przechowywania / użytkowania:
+                    Miejsce użytkowania:
                 <input type="text" value={place} onChange={getPlace} />
             </label>
             <button disabled={validation} onClick={submiter}>Dodaj dane...</button>

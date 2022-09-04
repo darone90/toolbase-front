@@ -1,5 +1,7 @@
 import React, { ChangeEvent, useState, MouseEvent } from 'react';
 
+import './Password.scss';
+
 interface Props {
     func: (e: MouseEvent<HTMLElement>, password: string, newPassword: string, confirm: string) => void;
 }
@@ -12,7 +14,7 @@ const Password = (props: Props) => {
 
 
     return (
-        <form>
+        <form className='Password-change'>
             <label>
                 Podaj stare hasło:
                 <input type="password" value={old} onChange={(e: ChangeEvent<HTMLInputElement>) => setOld(e.target.value)} />

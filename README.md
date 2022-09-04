@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# Tool base application
+## Front-end part
+This application is integral part of tool base service. Back-end part you can find here:
+https://github.com/darone90/toolbase-back
+Application was made for client company Forman to have control on workshop tool. Forman can add new tools, remove old, add statuses, store places, responsible workers and adjust types and subtypes of equipment. Also he have access to history of each tool users.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Application map
+All application is available only after login:
 
-## Available Scripts
+```mermaid
+graph LR
+A[login] -- http only cookie --> B[Application]
+B --> C[Tool list] --> D[simple tool info and statuses adjust]
+B --> E[add tool form]
+B --> F[add tool types and subtypes form]
+B --> G[worker list]
+B --> H[tools use history] 
+B --> I[login data changes]
+B --> J[logout]
+```
+## Technology stack
+This app was made on React and written in TypeScript, contains global storage build with Redux tool kit. All css layer build with scss preprocessor. Routing was made with react-router.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## How to start ?
+After repository clone, use node package manager to install required modules. In app folder tap in your terminal:
+- npm install
+After packages installing you can start developer server by command:
+- npm start
+To build static production version:
+-npm run build
+## Contact
+To reach author use email address: pileckidariusz90@gmail.com
+## Copyrights
+All code and images in this app belong to Techglass Sp. z o.o. company
+Using any parts of this repository in commercial are forbidden.

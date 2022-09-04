@@ -44,10 +44,7 @@ const ToolTechnicalForm = (props: Props) => {
                 subtype: selectedSubtype
             };
             props.addTechnicalInfo(technicalData);
-        } else {
-            console.log('walidacja do napisania')
-        }
-
+        } 
     }
 
     const firstOptions = list.map(tool => tool.name);

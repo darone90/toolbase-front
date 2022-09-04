@@ -1,10 +1,11 @@
-
+import {backendAddress} from '../connection.config';
 
 export const dataGetter = async (path: string) => {
 
     try {
-        const connecting = await fetch(`http://localhost:8080${path}`, {
-            method: 'GET'
+        const connecting = await fetch(`${backendAddress.address}${path}`, {
+            method: 'GET',
+            credentials: 'include'
         })
         const data = await connecting.json()
         if (data.error) {
@@ -18,8 +19,9 @@ export const dataGetter = async (path: string) => {
 
 export const dataPoster = async (data: object, method: string, path: string): Promise<string | undefined> => {
     try {
-        const income = await fetch(`http://localhost:8080/${path}`, {
+        const income = await fetch(`${backendAddress.address}/${path}`, {
             method: method,
+            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });

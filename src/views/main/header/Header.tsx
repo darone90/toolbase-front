@@ -12,7 +12,7 @@ const Header = () => {
 
     const changeClockSize = () => {
         const width = window.innerWidth;
-        if (width < 480) {
+        if (width < 481) {
             setClockSize(60);
         }
     }

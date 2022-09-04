@@ -22,6 +22,7 @@ const Login = () => {
 
     const [infoVisible, setInfoVisible] = useState<boolean>(false);
     const [spinnerVisible, setSpinnerVisible] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
     const [loginData, setLoginData] = useState<ForLogin>({
         login: '',
         password: ''
@@ -45,9 +46,9 @@ const Login = () => {
             setInfoVisible(true);
             setSpinnerVisible(false);
         } catch (error: unknown) {
-            if (error instanceof Error)
-                console.log(error)
-                //dopisac obsluge blędu bez navigate
+            if (error instanceof Error){
+                setError(true);
+            }
         }
     };
 
@@ -58,7 +59,7 @@ const Login = () => {
         }))
     }
 
-    const loginInfoBox = <div className='login__info'><strong>Niepoprawny login lub hasło</strong></div>;
+    const loginInfoBox = <div className='login__info'><strong>{error ? 'Wystąpił nieoczekiwany błąd' : 'Niepoprawny login lub hasło'}</strong></div>;
 
     return (
         <div className='login'>
