@@ -1,7 +1,5 @@
 import React, { useState, ChangeEvent, MouseEvent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import Button from '../../components/general/button/Button';
-import { buttonClass } from '../../types/styleTypes';
 import { appLogin } from '../../features/login-slice';
 import { communicate } from '../../global/functions';
 import { Login as LoginData } from '../../types/loginTypes';
@@ -63,22 +61,25 @@ const Login = () => {
 
     return (
         <div className='login'>
-            <div className="login__logo">
-                <img src={logo} alt="techglass logo" />
-            </div>
+            <div className="login__bkg">
+            
             <form>
-                <label>
-                    Login:
-                    <input type="text" value={loginData.login} name='login' onChange={addLoginData} />
-                </label>
-                <label>
-                    Hasło:
-                    <input type="password" value={loginData.password} name='password' onChange={addLoginData} />
-                </label>
-                <Button link={false} title='Zaloguj' addClass={buttonClass.SMALL} func={loginFunc} />
+                <div className="login__bkg-logo">
+                    <img src={logo} alt="techglass logo" />
+                </div>
+                    <input type="text" value={loginData.login} name='login' onChange={addLoginData} placeholder='Login' className={infoVisible ? 'wrong' : ''}/>
+                
+                    <input type="password" value={loginData.password} name='password' onChange={addLoginData} placeholder='Hasło' className={infoVisible ? 'wrong' : ''}/>
+
+                    {infoVisible ? loginInfoBox : null}
+
+                    <button onClick={loginFunc} className={infoVisible ? 'wrong' : ''}>Zaloguj</button>
+
+                    {spinnerVisible ? <Spinner /> : null}
             </form>
-            {spinnerVisible ? <Spinner /> : null}
-            {infoVisible ? loginInfoBox : null}
+            
+            
+            </div>
         </div>
     )
 }

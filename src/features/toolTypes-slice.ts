@@ -46,7 +46,7 @@ export const toolTypeSlice = createSlice({
             state.list = [...filered, action.payload];
         },
         addOneSubtype: (state, action: oneAdd) => {
-            const tool = state.list.find(el => el.id == action.payload.id);
+            const tool = state.list.find(el => el.id === action.payload.id);
             if (tool)
                 tool.subtypes = [...tool?.subtypes as string[], action.payload.newSubtype]
         },
